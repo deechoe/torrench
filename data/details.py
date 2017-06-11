@@ -22,6 +22,7 @@ import urllib2
 import os;
 
 def get_details(url, index):
+	
 	home = os.path.expanduser('~')
 	main_dir = home+"/.torrench/"
 	temp_dir = main_dir+"temp/"

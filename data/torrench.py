@@ -19,34 +19,39 @@ You should have received a copy of the GNU General Public License
 along with Foobar.  If not, see <http://www.gnu.org/licenses/>. 
 '''
 
-import argparse
-import urllib2
 import os
 import sys
-from bs4 import BeautifulSoup
-from tabulate import tabulate
-from termcolor import colored
-import find_url
+import argparse
 
-def main(args):
+def init(args):
 	# Resolve arguments - BEGIN
+	input_title = args.search
+	page_limit = args.limit
 	if args.clear_html:
 		home = os.path.expanduser('~')
 		temp_dir = home+"/.torrent/temp/*"
 		res = os.system("rm -rf "+temp_dir);
 		print "Cleared"
 		sys.exit();
-		
-	page_limit = args.limit
-	if page_limit <= 0 or page_limit > 50:
-		print "Enter valid input (0<p<=50)"
-		sys.exit();
-	input_title = args.search
 	if input_title == None:
 		print "\nInput string expected.\nUse --help for more\n";
 		sys.exit();
+	elif page_limit <= 0 or page_limit > 50:
+		print "Enter valid page input [0<p<=50]"
+		sys.exit();
+	else:
+		main(input_title, page_limit);
 	# Resolve input arguments - END
 
+def main(input_title, page_limit):
+	
+	## Adding imports here since they are only required if this function is called.
+	import urllib2
+	import find_url
+	from bs4 import BeautifulSoup
+	from tabulate import tabulate
+	from termcolor import colored
+	
 	title = input_title.replace(" ", "+")
 	hdr = {'User-Agent': 'Mozilla/5.0'}
 	url_list = []
@@ -181,9 +186,9 @@ def main(args):
 		print "\nBye"
 
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser(version="Version 1.0", description="simple torrent search tool.", epilog="HELLLLOOOO")
+	parser = argparse.ArgumentParser(version="Version 1.0", description="A simple torrent search tool.")
 	parser.add_argument("search", help="Enter search string", nargs="?", default=None)
 	parser.add_argument("-p", "--page-limit", type=int, help="Number of pages to fetch results from (1 page = 30 results).\n [default: 1]", default=1, dest="limit")
 	parser.add_argument("-c", "--clear-html", action="store_true", default=False, help="Clear all torrent description HTML files and exit.")
 	args = parser.parse_args()
-	main(args);
+	init(args);
