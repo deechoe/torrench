@@ -150,7 +150,7 @@ def main(input_title, page_limit):
     # Print Results and fetch torrent details
 	if(total_result_count > 0):
 		print "\n\nS=Seeds; L=Leeches; C=Comments"
-		final_output = tabulate(masterlist, headers=['TYPE', 'NAME', 'INDEX', 'UPLOADER', 'SIZE','S','L', 'UPLOADED', "C"], tablefmt="html")
+		final_output = tabulate(masterlist, headers=['TYPE', 'NAME', 'INDEX', 'UPLOADER', 'SIZE','S','L', 'UPLOADED', "C"], tablefmt="grid")
 		print final_output
 		print "\nTotal: "+str(total_result_count)+" torrents"
 		exact_no_of_pages = total_result_count/30;
