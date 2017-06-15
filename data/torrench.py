@@ -86,7 +86,7 @@ def main(input_title, page_limit):
 				raw = urllib2.urlopen(req).read()
 				break;
 			except urllib2.URLError as e:
-				print "Link Not reachable..."+e
+				print "Link Not reachable... Trying next proxy..."
 				url_list_count = url_list_count+1
 				url = url_list[url_list_count]
 				comp_url = url+search
