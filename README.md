@@ -4,6 +4,7 @@ Torrench is a simple command-line tool that fetches torrents and displays result
 _Torrench initially began as a python learning project for me. I am sure there are ways to implement code I wrote in a better/efficient way. If you find any, please **update me**._
 
 _I'll continue updating it, add new features and try making it better and more efficient._
+_If you find this tool helpful, spread the word please. Thank you!_
 
 ## Features
 * ~~ads ads ads~~ Now surf torrents **Ad-free**
@@ -63,7 +64,7 @@ $ torrench "the flash s03e16" - Fetches torrents for 'the flash s01e01' from fir
 ```
 ## Known Issues (and Workarounds)
 1. Results overlap with each other
-	* Workaround - [If enlarging the terminal does not solve this ofc](Recommended) Reduce the output parametes [In torrench.py -> alter _mylist_ and _final_output_ accordingly] OR reduce terminal font size.
+	* Workaround - **If enlarging the terminal does not solve this ofc** - (Recommended) Reduce the output parametes [In torrench.py -> alter _mylist_ and _final_output_ accordingly] OR reduce terminal font size.
 2. A torrent might take very long to fetch results. I have generally faced this issue when running torrench for the first time. I still got to figure this out. Till then, here is what I do:
 	* Abort the ongoing search [Ctrl+C]
 	* Search again. The second time generally works fine.
