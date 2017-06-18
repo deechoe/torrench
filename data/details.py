@@ -18,7 +18,7 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
 from bs4 import BeautifulSoup
-import urllib2
+import requests
 import os;
 
 def get_details(url, index):
@@ -30,28 +30,22 @@ def get_details(url, index):
 	vip_icon = icon_dir+"vip.gif"
 	trusted_icon = icon_dir+"trusted.png"
 	uploader_icon = ["<img src='"+vip_icon+"'>", "<img src='"+trusted_icon+"'>"]
-	
-	hdr = {'User-Agent': 'Mozilla/5.0'}
-	req = urllib2.Request(url, headers=hdr)
-	raw = urllib2.urlopen(req).read()
-
+	raw = requests.get(url);
+	raw = raw.content
 	unique_id = url.split('/')[-1]
 	file_name = unique_id+".html"
-	
 	soup = BeautifulSoup(raw, "lxml")
 	content = soup.find('div', id="details")
-	nfo = content.find_all('div', class_="nfo")[0].encode('utf-8')
+	nfo = str(content.find_all('div', class_="nfo")[0])
 	dt = content.find_all('dt')
 	dd = content.find_all('dd')
-
-	title = "(Index: "+index+") - "+soup.find('div', id="title").string.encode('utf-8')
-	name = soup.find('div', id="title").string.encode('utf-8')
+	title = "(Index: "+index+") - "+str(soup.find('div', id="title").string)
+	name = str(soup.find('div', id="title"))
 	magnet = soup.find('div', class_="download").a["href"]
 	comment = soup.find_all('div', class_='comment')
 	commenter = soup.find(id="comments").find_all('p')
 	
 	# Check Uploader-Status
-	
 	style_tag = "<style> pre {white-space: pre-wrap; text-align: left} h2, .center {text-align: center;} .vip {color: #336600} .trusted {color: #FF00CC}  body {margin:0 auto; width:70%;} table, td, th {border: 1px solid black;} td, th {text-align: center; vertical-align: middle; font-size: 15px; padding: 6px} .boxed{border: 1px solid black; padding: 3px} </style> "
 	begin_tags = "<!DOCTYPE html><html><head><meta http-equiv='Content-type' content='text/html;charset=utf-8'> <title>"+title+"</title>"+style_tag+"</head><body>"
 	end_tags = "</body></html>"
@@ -66,17 +60,17 @@ def get_details(url, index):
 
 	# The info table
 	for i in dt:
-		dt_str = i.get_text().encode('utf-8').replace(":", "")
+		dt_str = str(i.get_text()).replace(":", "")
 		f.write("<th>"+dt_str+"</th>")
 	f.write("</tr>\n<tr>\n")
+	
 	for j in dd:
-		dd_str = j.get_text().encode('utf-8').replace(":", "")
+		dd_str = str(j.get_text()).replace(":", "")
 		if j.img != None:
 			if j.img['title'] == 'VIP':
 				dd_str = "<div class='vip'>"+dd_str+"</div>" + uploader_icon[0];
 			elif j.img['title'] == 'Trusted':
-				dd_str = "<div class='trusted'>"+dd_str+"</div>" + uploader_icon[1];
-				
+				dd_str = "<div class='trusted'>"+dd_str+"</div>" + uploader_icon[1];	
 		f.write("<td>"+dd_str+"</td>")
 
 	f.write("</tr></table><br />")
@@ -98,8 +92,8 @@ def get_details(url, index):
 	if commenter != []:
 		f.write("<table align='center'>")
 		for i, j in zip(commenter, comment):
-			f.write("<tr><th>"+i.get_text().encode("utf-8")+"</th>")
-			f.write("<td><pre>"+j.get_text().encode("utf-8")+"</pre></td></tr>")
+			f.write("<tr><th>"+str(i.get_text())+"</th>")
+			f.write("<td><pre>"+str(j.get_text())+"</pre></td></tr>")
 		f.write("</table><br />");
 	else:
 		f.write("<div class='center'><pre>No comments fetched!</pre></div>") 
@@ -114,5 +108,5 @@ def get_details(url, index):
 	return file_url
 	
 if __name__ == "__main__":
-	print "It's a module. Can only be imported!"
+	print("It's a module. Can only be imported!");
 	

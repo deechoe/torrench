@@ -18,21 +18,18 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
 from bs4 import BeautifulSoup
-import urllib2
+import requests
 
 url = "https://thepiratebay-proxylist.org/"
-hdr = {'User-Agent': 'Mozilla/5.0'}
-req = urllib2.Request(url, headers=hdr)
-raw = urllib2.urlopen(req).read()
+raw = requests.get(url)
+raw = raw.content
 soup = BeautifulSoup(raw, "lxml")
 links = soup.find_all('td', {'title': 'URL'}, limit=2)
-
 myList = []
-
 def find_url_list():
 	for i in links:
 		myList.append(i.a["href"]);
 	return myList
 
 if __name__ == "__main__":
-	print "It's a module. Can only be imported!"
+	print("It's a module. Can only be imported!");
