@@ -19,9 +19,10 @@ _I'll continue updating it, add new features and try making it better and more e
 
 
 ## Requirements and Installation
-1. Requires [Python2](https://www.python.org/downloads/)
+1. Requires [Python3](https://www.python.org/downloads/)
 2. Install following pip packages
 ```bash 
+$ pip install requests
 $ pip install bs4 
 $ pip install lxml 
 $ pip install tabulate 
@@ -41,26 +42,28 @@ $ printf "#Torrench\nPATH=$HOME/.torrench/bin:$PATH" >> $HOME/.bashrc; source $H
 
 ## Usage (example below)
 ```bash
-usage: torrench [-h] [-v] [-p LIMIT] [-c] [search]
+usage: torrench [-h] [-p LIMIT] [-c] [-v] [search]
 
-mandatory arguments:
+A simple torrent search tool.
+
+positional arguments:
   search                Enter search string
 
 optional arguments:
-  -h, --help            show help message and exit
-  -v, --version         show program's version number and exit
+  -h, --help            show this help message and exit
   -p LIMIT, --page-limit LIMIT
-                        Number of pages to fetch results from.
-                        1 page = 30 results. [default: 1]
+                        Number of pages to fetch results from (1 page = 30
+                        results). [default: 1]
   -c, --clear-html      Clear all torrent description HTML files and exit.
-
+  -v, --version         Display version and exit.
+  
 Example: 
 $ torrench -p 5 "suits s01e01" - Fetches torrents for 'suits s01e01' from first 5 pages
 $ torrench "the flash s03e16" - Fetches torrents for 'the flash s01e01' from first page only
 ```
 ## Known Issues (and Workarounds)
 1. Results overlap with each other
-	* Workaround - (Recommended) Reduce the output parametes [In torrench.py -> alter _mylist_ and _final_output_ accordingly] OR reduce terminal font size.
+	* Workaround - [If enlarging the terminal does not solve this ofc](Recommended) Reduce the output parametes [In torrench.py -> alter _mylist_ and _final_output_ accordingly] OR reduce terminal font size.
 2. A torrent might take very long to fetch results. I have generally faced this issue when running torrench for the first time. I still got to figure this out. Till then, here is what I do:
 	* Abort the ongoing search [Ctrl+C]
 	* Search again. The second time generally works fine.
