@@ -21,13 +21,18 @@ _If you find this tool helpful, spread the word please. Thank you!_
 
 ## Requirements and Installation
 1. Requires [Python3](https://www.python.org/downloads/)
-2. Install following pip packages
+2. Install following packages
 ```bash 
-$ pip install requests
-$ pip install bs4 
-$ pip install lxml 
-$ pip install tabulate 
-$ pip install termcolor
+## [Using pip (Distro-independent)(Recommended)]
+## [pip comes pre-installed with python 3.4+]
+$ (sudo) python3 -m pip install requests bs4 lxml tabulate termcolor
+# OR
+## using package managers
+# Ubuntu
+$ sudo apt install python3-{requests,bs4,lxml,tabulate,termcolor}
+# Fedora
+$ sudo dnf install python3-{requests,bs4,lxml,tabulate,termcolor}
+# Arch :: (Use pip)
 ```
 3. Simple copy-paste the following in terminal for installation
 ```bash
