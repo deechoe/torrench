@@ -65,7 +65,7 @@ optional arguments:
   
 Example: 
 $ torrench -p 5 "suits s01e01" - Fetches torrents for 'suits s01e01' from first 5 pages
-$ torrench "the flash s03e16" - Fetches torrents for 'the flash s01e01' from first page only
+$ torrench "the flash s03e16" - Fetches torrents for 'the flash s03e16' from first page only
 ```
 ## Known Issues (and Workarounds)
 1. Results overlap with each other
