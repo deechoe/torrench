@@ -28,9 +28,9 @@ _If you find this tool helpful, spread the word please. Thank you!_
 $ (sudo) python3 -m pip install requests bs4 lxml tabulate termcolor
 # OR
 ## using package managers
-# Ubuntu
+# Ubuntu (>=16.04)
 $ sudo apt install python3-{requests,bs4,lxml,tabulate,termcolor}
-# Fedora
+# Fedora (Tested on F25)
 $ sudo dnf install python3-{requests,bs4,lxml,tabulate,termcolor}
 # Arch :: (Use pip)
 ```
