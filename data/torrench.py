@@ -29,10 +29,17 @@ def init(args):
 	page_limit = args.limit
 	if args.clear_html:
 		home = os.path.expanduser('~')
-		temp_dir = home+"/.torrench/temp/*"
-		res = os.system("rm -rf "+temp_dir);
-		print("Cleared");
-		sys.exit();
+		temp_dir = home+"/.torrench/temp/"
+		files = os.listdir(temp_dir);
+		if files:
+			count=1
+			for i in files:
+				os.remove(i);
+				count = count+1;
+			print("\nRemoved %d file(s).\n" %count)
+		else:
+			print("\nNothing to remove\n")
+		sys.exit()
 	if input_title == None:
 		print("\nInput string expected.\nUse --help for more\n");
 		sys.exit();
